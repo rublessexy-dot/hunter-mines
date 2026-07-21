@@ -1,0 +1,536 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html,
+body,
+#root{
+
+width:100%;
+min-height:100%;
+
+font-family:Inter,Arial,sans-serif;
+
+background:#09111f;
+
+overflow-x:hidden;
+
+color:white;
+
+}
+
+body{
+
+background:
+radial-gradient(circle at top,#183768,#09111f 65%);
+
+}
+
+.app{
+
+position:relative;
+
+min-height:100vh;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+padding:28px 18px 40px;
+
+gap:22px;
+
+overflow-y:auto;
+
+}
+
+.backgroundGlow{
+
+position:fixed;
+
+width:600px;
+height:600px;
+
+border-radius:50%;
+
+background:#2d83ff;
+
+filter:blur(180px);
+
+opacity:.18;
+
+top:-260px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+pointer-events:none;
+
+}
+
+/* ======================= */
+
+.logo{
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+gap:6px;
+
+margin-top:5px;
+
+}
+
+.logoIcon{
+
+font-size:52px;
+
+animation:logoFloat 2s ease-in-out infinite;
+
+}
+
+.logoText{
+
+font-size:34px;
+
+font-weight:900;
+
+letter-spacing:2px;
+
+text-align:center;
+
+text-transform:uppercase;
+
+}
+
+.logoText span{
+
+display:block;
+
+color:#4fb8ff;
+
+font-size:42px;
+
+text-shadow:
+
+0 0 18px #3cb7ff;
+
+}
+
+@keyframes logoFloat{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-6px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ======================= */
+
+.board{
+
+width:min(92vw,430px);
+
+aspect-ratio:1;
+
+padding:16px;
+
+border-radius:26px;
+
+display:grid;
+
+grid-template-columns:repeat(5,1fr);
+
+gap:10px;
+
+background:
+
+rgba(255,255,255,.06);
+
+backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.08);
+
+box-shadow:
+
+0 20px 50px rgba(0,0,0,.45);
+
+}
+
+.cell{
+
+border-radius:16px;
+
+background:
+
+linear-gradient(180deg,#43d0ff,#2597ea);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+cursor:pointer;
+
+transition:.18s;
+
+}
+
+.cell:hover{
+
+transform:translateY(-2px);
+
+box-shadow:
+
+0 0 15px rgba(60,195,255,.7);
+
+}
+
+.icon{
+
+width:65%;
+
+animation:pop .25s;
+
+}
+
+.starIcon{
+
+filter:
+
+drop-shadow(0 0 8px gold);
+
+}
+
+.mineIcon{
+
+animation:
+
+pop .25s,
+
+shake 1.6s infinite;
+
+}
+
+@keyframes shake{
+
+0%{transform:rotate(0deg);}
+20%{transform:rotate(-5deg);}
+40%{transform:rotate(5deg);}
+60%{transform:rotate(-4deg);}
+80%{transform:rotate(4deg);}
+100%{transform:rotate(0deg);}
+
+}
+
+@keyframes pop{
+
+0%{
+
+transform:scale(.2);
+
+opacity:0;
+
+}
+
+70%{
+
+transform:scale(1.15);
+
+}
+
+100%{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+}
+
+/* ======================= */
+/* ПАНЕЛЬ ЛОВУШЕК */
+/* ======================= */
+
+.trapsPanel{
+
+    width:min(320px,88vw);
+
+    height:74px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 16px;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.06);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.35);
+
+}
+
+.arrow{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#253250;
+
+    color:white;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.arrow:hover{
+
+    background:#3d8fff;
+
+    transform:scale(1.08);
+
+}
+
+.arrow:active{
+
+    transform:scale(.95);
+
+}
+
+.trapCenter{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:3px;
+
+}
+
+.trapTitle{
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    color:#8ecbff;
+
+    font-weight:700;
+
+}
+
+.trapValue{
+
+    font-size:30px;
+
+    font-weight:900;
+
+}
+
+/* ======================= */
+/* КНОПКА ИГРАТЬ */
+/* ======================= */
+
+.play{
+
+    width:min(430px,92vw);
+
+    height:72px;
+
+    border:none;
+
+    border-radius:22px;
+
+    background:
+    linear-gradient(
+        180deg,
+        #48a8ff,
+        #257dff
+    );
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:
+
+    0 12px 35px rgba(37,125,255,.45);
+
+}
+
+.play:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+
+    0 20px 45px rgba(37,125,255,.6);
+
+}
+
+.play:active{
+
+    transform:scale(.98);
+
+}
+
+/* ======================= */
+/* ТЕЛЕФОН */
+/* ======================= */
+
+@media(max-width:600px){
+
+.app{
+
+padding-top:18px;
+
+gap:18px;
+
+}
+
+.logoIcon{
+
+font-size:42px;
+
+}
+
+.logoText{
+
+font-size:26px;
+
+}
+
+.logoText span{
+
+font-size:34px;
+
+}
+
+.board{
+
+width:94vw;
+
+padding:12px;
+
+gap:8px;
+
+}
+
+.cell{
+
+border-radius:12px;
+
+}
+
+.icon{
+
+width:58%;
+
+}
+
+.trapsPanel{
+
+width:90vw;
+
+height:68px;
+
+}
+
+.play{
+
+width:94vw;
+
+height:66px;
+
+font-size:24px;
+
+}
+
+}
+
+/* ======================= */
+/* АНИМАЦИЯ ПРИ ЗАГРУЗКЕ */
+/* ======================= */
+
+.board,
+.trapsPanel,
+.play,
+.logo{
+
+animation:fade .45s ease;
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(12px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
